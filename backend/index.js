@@ -3,6 +3,7 @@ const express = require('express');
 const axios = require('axios');
 
 const app = express();
+
 const PORT = process.env.PORT ||  5000;
 
 // Cache to store product datas
@@ -11,7 +12,11 @@ let productCache = {};
 // Helper function to fetch products from test API
 const fetchProducts = async (company, category, minPrice, maxPrice, top) => {
     const url = `http://20.244.56.144/test/companies/${company}/categories/${category}/products?top=${top}&minPrice=${minPrice}&maxPrice=${maxPrice}`;
-    const response = await axios.get(url);
+    const response = await axios.get(url,{
+        headers: {
+            Authorization: `Bearer qRyJyAmaLXAoFiYE`
+        }
+    });
     return response.data;
 };
 
